@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commerce en Ligne - Connexion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login-container input {
+            margin-bottom: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .login-container button {
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .login-container .logo {
+            margin-bottom: 20px;
+        }
+        .login-container .logo img {
+            max-width: 100px;
+        }
+        .login-container p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        .login-container a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .login-container a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+        </div>
+        <h2>Connexion</h2>
+        <form>
+            <input type="text" placeholder="Nom d'utilisateur" required>
+            <input type="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+        <p>Vous n'avez pas de compte ? <a href="#">Inscrivez-vous</a></p>
+    </div>
+</body>
+</html>

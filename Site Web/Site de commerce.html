@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commerce en Ligne</title>
+    <style> 
+    
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+        .header .date {
+            color: orange;
+        }
+        .header .time {
+            color: orange;
+            margin-left: 10px; /* Espacement entre la date et l'heure */
+        }
+        .product:hover {
+    transform: scale(1.05);
+    background-color: #ffc107; /* Couleur de fond au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product .select-button {
+    display: none; /* Initialement caché */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1; /* S'assure que le bouton apparaît au-dessus du produit */
+}
+
+.product:hover .select-button {
+    display: block; /* Affiche le bouton au survol */
+}
+
+        
+        .login button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login button:hover {
+    background-color: #0056b3;
+}
+
+      
+        .categories {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .categories button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .categories button:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .product {
+            text-align: center;
+            border: 1px solid #ccc;
+            padding: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .carousel {
+            display: flex;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel img {
+            width: 100%;
+            scroll-snap-align: center;
+        }
+        .carousel img:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+        .comments {
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .comments h2 {
+            text-align: center;
+        }
+        .comments .comment {
+            margin: 10px 0;
+        }
+        .comments .comment .author {
+            font-weight: bold;
+        }
+        #scrollUp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px; /* Ajustement du padding pour le bouton de scroll */
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        #scrollUp:hover {
+            background-color: #0056b3;
+        }
+        .login {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+        /* Thème clair */
+body.light-theme {
+    background-color: white;
+    color: black;
+}
+
+/* Thème sombre */
+body.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.product {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product:hover {
+    transform: scale(1.05);
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.product div {
+    margin-top: 10px;
+}
+
+.product div:first-of-type {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.product div:last-of-type {
+    font-size: 1em;
+    color: #777;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="login">
+        <button onclick="redirectToLogin()">Connexion</button>
+    </div>
+    
+
+<div class="header">
+    <div class="date">
+        <!-- Date actuelle -->
+        <script>
+            document.write(new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+        </script>
+    </div>
+    <div class="time">
+        <!-- Heure actuelle -->
+        <script>
+            function updateTime() {
+                document.querySelector('.time').innerText = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+            }
+            setInterval(updateTime, 1000);
+            updateTime();
+        </script>
+    </div>
+    <button onclick="toggleTheme()">Basculer thème</button>
+</div>
+
+<h1 style="text-align: center;">COMMERCE EN LIGNE</h1>
+
+<div class="categories">
+    <button>TOUT</button>
+    <button>LEGUMES</button>
+    <button>FRUITS</button>
+    <button>VIANDES</button>
+    <button>POISSONS</button>
+    <button>EPICERIE</button>
+    <button>FROMAGES</button>
+    <button>BOISSONS</button>
+    <button>HYGIENE</button>
+</div>
+
+<div class="products">
+    <div class="product">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/020/899/515/small/red-apple-isolated-on-white-png.png" alt="Pommes">
+        <div>Pommes</div>
+        <div>1€60</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+    </div>
+    <div class="product">
+        <img src="https://www.icone-png.com/png/13/13081.png" alt="Bannanes ">
+        <div>Bannnes </div>
+        <div>1€ 25</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+    </div>
+
+    <div class="product">
+        <img src="https://www.academiedugout.fr/images/9857/1200-auto/boeuf_000.jpg?poix=50&poiy=50" alt="Viande Boeuf">
+        <div>Viande de Boeuf</div>
+        <div>14€60</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+    </div>
+
+    <div class="product">
+        <img src="https://www.academiedugout.fr/images/5466/1200-auto/sardine-copy.jpg?poix=50&poiy=50" alt="Sardine">
+        <div>Sardine</div>
+        <div>3€10</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+    </div>
+
+    <div class="product">
+        <img src="https://inty.ma/5213-large_default/cerave-creme-hydratante-visage-52-ml.jpg" alt="Cerave">
+        <div>Cerave</div>
+        <div>4€</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://noreva-laboratoires.com/wp-content/uploads/2022/10/Noreva_Produit_Aquareva_Creme-riche_Vignette_896x1080.png" alt="noreva">
+        <div>Noreva</div>
+        <div>6€40</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1PQCIY8txq_jr6KC-KyltRh4kKjM35M81fA&s" alt="Carrottes">
+        <div>Carrottes</div>
+        <div>1€19</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://fridg-front.s3.amazonaws.com/media/CACHE/images/products/fromage-blanc-calin-3-2-de-mg-yoplait-450-g/24d05c259f04a877e2ae2fd9e7836023.jpg" alt="Fromage Blanc">
+        <div>Fromage Blanc</div>
+        <div>2€59</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-6Nq9pAeck6G7RqKKwSFe_Nh0rUNd0_Oj0w&s" alt="Camembert">
+        <div>Camenmbert</div>
+        <div>2€60</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://img.freepik.com/photos-gratuite/tomates-rouges-fraiches_2829-13449.jpg" alt="Tomates">
+        <div>Tomates</div>
+        <div>3€80</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://woodiz.fr/65-large_default/eau-minerale-evian-50cl.jpg" alt="Evian">
+        <div>Evian</div>
+        <div>60c</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://boucherie-zielinger.fr/240-large_default/roule-collet-de-porc.jpg" alt="gigot d'agneau">
+        <div>gigot d'agneau</div>
+        <div>4€30</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://www.maisonreignier.com/wp-content/uploads/2020/08/cristaline-1.5l.png" alt="Cristaline">
+        <div>Cristaline</div>
+        <div>60c</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://png.pngtree.com/png-clipart/20220818/ourmid/pngtree-watermelon-fruits-with-no-seeds-png-image_6114369.png" alt="Pastèques">
+        <div>Pastèques</div>
+        <div>1€ 65</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://static.vecteezy.com/system/resources/previews/027/216/322/original/onion-onion-transparent-background-ai-generated-free-png.png" alt="Oignions">
+        <div>Oignions</div>
+        <div>2€30</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+
+    </div>
+    <div class="product">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6cG2-An8laigtHgA6Nihx0ENuSjxgFUY9kA&s" alt="Saumon">
+        <div>Saumon</div>
+        <div>2€25</div>
+        <button class="select-button" onclick="selectProduct()">Sélectionner</button>
+        
+    </div>
+</div>
+
+<button id="scrollUp" onclick="scrollToTop()">↑</button>
+
+<script>
+    // Fonction pour faire défiler vers le haut
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Afficher le bouton de défilement vers le haut lorsque l'utilisateur fait défiler vers le bas
+    window.onscroll = function() {
+        const scrollUpButton = document.getElementById('scrollUp');
+        if (document.documentElement.scrollTop > 100) {
+            scrollUpButton.style.display = 'block';
+        } else {
+            scrollUpButton.style.display = 'none';
+        }
+    };
+  
+        function redirectToLogin() {
+            // Ajoutez ici la logique de redirection vers la page de connexion
+            alert('Redirection vers la page de connexion...');
+        }
+
+        function toggleTheme() {
+    // Sélectionne l'élément body
+    var body = document.body;
+
+    // Bascule entre les classes 'light-theme' et 'dark-theme'
+    body.classList.toggle('light-theme');
+    body.classList.toggle('dark-theme');
+}
+
+// Assure que le thème par défaut est le thème clair
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add('light-theme');
+});
+
+        function redirectToLogin() {
+    window.location.href = "inscriptioncommerce.html";
+    }
+    function selectProduct() {
+    // Ajoutez ici la logique pour sélectionner le produit, par exemple :
+    alert('Produit sélectionné !');
+}
+
+</script>
+
+</body>
+</html>
+
