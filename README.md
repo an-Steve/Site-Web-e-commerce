@@ -1,6 +1,6 @@
 # Site Web E‑Commerce
+<img width="1916" height="875" alt="capture565" src="https://github.com/user-attachments/assets/ad1cb22e-b49e-493f-ab92-f2a736fbe947" />
 
-![Aperçu du site]("C:\Users\anton\Downloads\capture565.png")
 ## Description
 Ce projet est un site web de e‑commerce développé en Terminale, utilisant les langages HTML, CSS et JavaScript.  
 L’objectif était de concevoir une plateforme simple et fonctionnelle permettant la présentation de produits, la gestion d’un panier et une expérience utilisateur fluide.
